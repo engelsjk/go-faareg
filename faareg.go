@@ -100,7 +100,6 @@ func GetRegistration(n string) (*Registration, error) {
 		switch e.Attr("data-label") {
 		// Aircraft
 		case "Serial Number":
-			fmt.Printf("%s\n", e.Text)
 			ac.SerialNumber = clean(e.Text)
 		case "Status":
 			ac.Status = clean(e.Text)
