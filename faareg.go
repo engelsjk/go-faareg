@@ -15,6 +15,7 @@ type Registration struct {
 }
 
 type Aircraft struct {
+	Registration         string `json:"n"`
 	SerialNumber         string `json:"serial_number"`
 	Status               string `json:"status"`
 	ManufacturerName     string `json:"manufacturer_name"`
@@ -78,7 +79,9 @@ func GetRegistration(n string) (*Registration, error) {
 
 	regStatus := ""
 
-	ac := Aircraft{}
+	ac := Aircraft{
+		Registration: fmt.Sprintf("N%s", n),
+	}
 	ro := RegisteredOwner{}
 	aw := Airworthiness{}
 
