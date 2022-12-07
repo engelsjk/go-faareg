@@ -79,8 +79,13 @@ func GetRegistration(n string) (*Registration, error) {
 
 	regStatus := ""
 
+	N := strings.ToUpper(n)
+	if !strings.HasPrefix(N, "N") {
+		N = fmt.Sprintf("N%s", N)
+	}
+
 	ac := Aircraft{
-		Registration: fmt.Sprintf("N%s", n),
+		Registration: N,
 	}
 	ro := RegisteredOwner{}
 	aw := Airworthiness{}
@@ -190,10 +195,11 @@ func GetRegistration(n string) (*Registration, error) {
 		return nil, ErrNotAssigned
 	}
 
-	reg := Registration{}
-	reg.Aircraft = ac
-	reg.RegisteredOwner = ro
-	reg.Airworthiness = aw
+	reg := Registration{
+		Aircraft:        ac,
+		RegisteredOwner: ro,
+		Airworthiness:   aw,
+	}
 
 	return &reg, nil
 }
